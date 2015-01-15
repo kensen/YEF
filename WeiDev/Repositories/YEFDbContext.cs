@@ -20,6 +20,10 @@ namespace YEF.Repositories
            :base(GetConnectionStringName())
        { }
 
+       //public YEFDbContext(string connectionString )
+       //    : base(connectionString)
+       //{ }
+
        public bool TransactionEnabled
        {
            get;
