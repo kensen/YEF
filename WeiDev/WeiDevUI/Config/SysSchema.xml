@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<System>
+    <Model Id="SystemSetting" Name="系统设置" Sort="0"  IsShow="0" Icon="fa-cogs">
+         <Menu Id="UserManage" Name="用户管理"  IsShow="0" Action="Index" Controller="User">
+           <Authority Id="Add"  IsShow="0">增加</Authority>
+           <Authority Id="Delete"  IsShow="0">删除</Authority>
+           <Authority Id="Updata"  IsShow="0">修改</Authority>
+           <Authority Id="Activate"  IsShow="0">激活/禁用</Authority>
+           <Authority Id="ResetPwd"  IsShow="0">重置密码</Authority>
+         </Menu>
+      
+      <Menu Id="Role" Name="角色管理"  IsShow="0" Action="Index" Controller="Role">
+        <Authority Id="Add" IsShow="0">增加</Authority>
+        <Authority Id="Delete" IsShow="0">删除</Authority>
+        <Authority Id="Updata" IsShow="0">修改</Authority>       
+      </Menu>
+      
+      <Menu Id="Purview" Name="权限设置"  IsShow="0" Action="Privilege" Controller="SystemSetting">
+        <Authority Id="Setting" IsShow="0">增加</Authority>        
+      </Menu>  
+    </Model>
+  
+  
+  
+  <Model Id="WeChatAPI" Name="微信接入设置" Sort="0"  IsShow="0" Icon="fa-bookmark">
+         <Menu Id="GetToken" Name="微信接入"  IsShow="0" Action="GetToken" Controller="WeChatAPI">
+           <Authority Id="Add"  IsShow="0">增加</Authority>
+          
+         </Menu>
+     
+    </Model>
+    
+</System>

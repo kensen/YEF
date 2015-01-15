@@ -1,0 +1,144 @@
+﻿@model YEF.Models.SysUser
+
+@{
+    ViewBag.Title = "添加用户";
+}
+
+<section class="wrapper">
+    <!-- page start-->
+    <div class="row">
+        <div class="col-lg-12">
+            <section class="panel panel-primary">
+                <header class="panel-heading">
+                    用户信息
+                </header>
+                <div class="panel-body">
+                    <div class="form">
+
+                        @using (Html.BeginForm("Create", "User", FormMethod.Post, new { @class = "cmxform form-horizontal tasi-form", id = "form1" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            @Html.ValidationSummary(true)
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.UserName, new { @class = "control-label col-lg-2" })
+                                <div class="col-lg-6">
+                                    @Html.TextBoxFor(model => model.UserName, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.UserName)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.LoginID, new { @class = "control-label col-lg-2" })
+                                <div class="col-lg-6">
+                                    @Html.TextBoxFor(model => model.LoginID, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.LoginID)
+                                </div>
+                            </div>
+
+                            @*<div class="form-group">
+                            @Html.LabelFor(model => model.Password, new { @class = "control-label col-lg-2" })
+                            <div class="col-lg-6">
+                                @Html.TextBoxFor(model => model.Password)
+                                @Html.ValidationMessageFor(model => model.Password)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ADPasswor, new { @class = "control-label col-lg-2" })
+                            <div class="col-lg-6">
+                                @Html.TextBoxFor(model => model.ADPasswor)
+                                @Html.ValidationMessageFor(model => model.ADPasswor)
+                            </div>
+                        </div>*@
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.UserType, new { @class = "control-label col-lg-2" })
+                                <div class="col-lg-6">
+                                    @Html.DropDownList("UserType", null, "请选择", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.UserType)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.SysRoleID, "用户角色", new { @class = "control-label col-lg-2" })
+                                <div class="col-lg-6">
+                                    @Html.DropDownList("SysRoleID", null, "请选择", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.SysRoleID)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.IsSPAdmin, new { @class = "control-label col-lg-2" })
+                                <div class="col-lg-6">
+
+                                    @Html.CheckBoxFor(model => model.IsSPAdmin, new { @class = "checkbox form-control", @style = "width:20px;" })
+                                    @Html.ValidationMessageFor(model => model.IsSPAdmin)
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <div class="col-lg-offset-2 col-lg-6">
+                                    <input type="submit" value="保存" class="btn btn-danger" />
+                                    @Html.ActionLink("取消", "Index", null, new { @class = "btn btn-default" })
+                                </div>
+                            </div>
+
+
+
+
+                        }
+
+
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <!-- page end-->
+</section>
+
+
+
+@section Scripts {
+  
+    @Scripts.Render("~/bundles/validate")
+<script>
+
+    $(document).ready(function () {
+        $("#form1").validate({
+            rules: {
+                UserName: "required",
+                LoginID: "required",
+                UserType: {
+                    required: true
+                     
+                },
+                SysRoleID: {
+                    required: true
+                     
+                }
+
+            },
+
+            messages: {
+                UserName: "用户名不能为空！",
+                LoginID: "账号不能为空！",
+                UserType: {
+                    required: "用户类型不能为空！"
+                       
+                },
+                SysRoleID: "角色不能为空！"
+            },
+            errorPlacement: function (error, element) {
+                error.appendTo(element.parent());
+            }
+        });
+    });
+   
+    
+    </script>
+
+}

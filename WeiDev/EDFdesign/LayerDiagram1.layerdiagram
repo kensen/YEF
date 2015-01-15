@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<layerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="2c806de4-8002-4bdc-bbda-0f75f37f31de" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/LayerDesigner">
+  <comments>
+    <comment Id="cf970211-914b-43fd-b581-bc8f742844bf" name="Comment1">
+      <body>基础设施层完成之后基本固定不需要修改，供数据仓储继承调用</body>
+      <layerElements>
+        <linkFromCommentToLayerElement>
+          <layerMoniker Id="85b8f5ca-85ff-4b3d-94a6-35faeb6a3c23" />
+        </linkFromCommentToLayerElement>
+      </layerElements>
+    </comment>
+    <comment Id="95c62f7f-0a53-4478-8c7c-51f16ade3124" name="Comment2">
+      <body>Services 通过注入Repository 为每个模块实现一个业务服务类，包括业务实现及模块相关的数据集合操作</body>
+      <layerElements>
+        <linkFromCommentToLayerElement>
+          <layerMoniker Id="5237b51f-4194-4863-a482-7cda3fab4127" />
+        </linkFromCommentToLayerElement>
+      </layerElements>
+    </comment>
+  </comments>
+  <layers>
+    <layer Id="85b8f5ca-85ff-4b3d-94a6-35faeb6a3c23" name="Infrastructure&#xD;&#xA;(基础设施层)">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="6c158ea2-82fc-4f00-9cf9-4ad30a51caca" direction="Forward">
+          <layerMoniker Id="33f77d7d-ff8b-4765-81d1-d3239bc98525" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <childLayers>
+        <layer Id="a73dc736-ff3c-484e-b7c6-122ef62fb7eb" name="DBContext&#xD;&#xA;（数据上下文）" />
+        <layer Id="873be522-fc42-478b-b0a0-82aae7b985d8" name="RepositoryBase&#xD;&#xA;（仓储基类）" />
+        <layer Id="bfd83b6c-a1db-40f6-aaab-c2a764d301cd" name="UnitOfWorkBase&#xD;&#xA;（统一工作单元基类）" />
+        <layer Id="ae3856a0-e41e-4551-83fa-2fff2b2990f6" name="Cache&#xD;&#xA;(缓存)" />
+      </childLayers>
+    </layer>
+    <layer Id="bd5141c1-72e9-4355-a241-906aa3f06aeb" name="Repositories&#xD;&#xA;(数据仓储层)">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="a3584ba8-4b09-484b-84c1-85627a19251d" direction="Forward">
+          <layerMoniker Id="85b8f5ca-85ff-4b3d-94a6-35faeb6a3c23" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="f7b7c60b-aeea-4961-987b-8ce044836525" direction="Forward">
+          <layerMoniker Id="f500ce63-03b3-4ff0-83c0-72b9e2146627" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="c5d1de23-3f35-4f1a-8e67-462ee2ddda52" direction="Forward">
+          <layerMoniker Id="33f77d7d-ff8b-4765-81d1-d3239bc98525" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <childLayers>
+        <layer Id="d08f2489-86a5-4c5d-be64-3cbf6e829b23" name="Repository&#xD;&#xA;(各种实体仓储)" />
+      </childLayers>
+    </layer>
+    <layer Id="e352fd3b-e344-4c21-8641-3e381c8ab990" name="AppServices &#xD;&#xA;(应用服务层)">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="e2138df8-6850-4f9b-878a-8ea0145fd714" direction="Forward">
+          <layerMoniker Id="bd5141c1-72e9-4355-a241-906aa3f06aeb" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="7362edb1-06dc-4895-a522-50a9c6e56ded" direction="Forward">
+          <layerMoniker Id="f500ce63-03b3-4ff0-83c0-72b9e2146627" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="2a2d86cb-82b7-47b6-af9f-ac23b1c64fc0" direction="Forward">
+          <layerMoniker Id="33f77d7d-ff8b-4765-81d1-d3239bc98525" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <childLayers>
+        <layer Id="ef9381da-3ef0-487d-bb35-b2333492f7c1" name="ViewModels&#xD;&#xA;(视图模型)" />
+        <layer Id="5237b51f-4194-4863-a482-7cda3fab4127" name="Services&#xD;&#xA;&#xD;&#xA;(业务服务)">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="02f2a069-a1c0-49a5-870a-04b6e3f3806e" direction="Forward">
+              <layerMoniker Id="ef9381da-3ef0-487d-bb35-b2333492f7c1" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+        </layer>
+      </childLayers>
+    </layer>
+    <layer Id="f500ce63-03b3-4ff0-83c0-72b9e2146627" name="M&#xD;&#xA;o&#xD;&#xA;d&#xD;&#xA;e&#xD;&#xA;l&#xD;&#xA;s&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;业务实体&#xD;&#xA;" />
+    <layer Id="1ae8c8d5-4a67-4929-a10c-5eca86a0fed0" name="UI&#xD;&#xA; (表现层)">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="8d65f59c-bbb0-4386-ad5f-f980d4d93703" direction="Forward">
+          <layerMoniker Id="e352fd3b-e344-4c21-8641-3e381c8ab990" />
+        </dependencyFromLayerToLayer>
+        <dependencyFromLayerToLayer Id="95b274cd-0597-47a7-878c-6a74ad9da826" direction="Forward">
+          <layerMoniker Id="33f77d7d-ff8b-4765-81d1-d3239bc98525" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+    </layer>
+    <layer Id="ffb76257-8b72-4f72-acff-f2e657d152a0" name="Utility&#xD;&#xA;&#xD;&#xA;工具集合">
+      <childLayers>
+        <layer Id="0b1b3d34-8619-4637-bfe7-5eb28eb200ef" name="数据校验" />
+        <layer Id="8c7b2e64-fa90-4ffb-b67c-306fb948264f" name="数据格式化" />
+        <layer Id="e385f0c0-f2a9-494f-a200-b4ddcc1399bf" name="数据加密" />
+        <layer Id="7bdbd06a-cb43-49de-b0a0-ebfc4b20a48a" name="类型扩展操作" />
+        <layer Id="d704807f-c93d-409a-b410-5d3a06c407c9" name="各种帮助类" />
+      </childLayers>
+    </layer>
+    <layer Id="33f77d7d-ff8b-4765-81d1-d3239bc98525" name="Interface&#xD;&#xA;（接口层）">
+      <childLayers>
+        <layer Id="bc210009-b85a-43a6-bc0c-4fd89b53ed12" name="IRepository&#xD;&#xA;（接口）" />
+        <layer Id="1650d014-3cb8-41fe-b91d-f4d71abafdcc" name="IServer&#xD;&#xA;（接口）" />
+        <layer Id="c54e166b-737a-400d-8d30-cc36bced269d" name="IBase&#xD;&#xA;(基础设施接口)" />
+      </childLayers>
+    </layer>
+  </layers>
+</layerModel>

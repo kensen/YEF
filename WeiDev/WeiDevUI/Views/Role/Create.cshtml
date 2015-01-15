@@ -1,0 +1,271 @@
+﻿@model YEF.Models.SysRole
+
+
+@{
+    ViewBag.Title = "添加角色";
+}
+
+@section AddToHead{
+    @*<link href="@Url.Content("~/Content/DataTable-1.10.2/css/dataTables.bootstrap.css")" rel="stylesheet" type="text/css" />*@
+    @Styles.Render("~/DT/css")  
+    <style type="text/css" class="init">
+        tr.group,
+        tr.group:hover, tr.group td {
+            background-color: #ddd !important;
+        }
+    </style>
+}
+
+<section class="wrapper">
+    <!-- page start-->
+    <div class="row">
+        <div class="col-lg-12">
+            <section class="panel panel-info">
+                <header class="panel-heading">
+                    角色信息
+                </header>
+                <div class="panel-body">
+                    <div class="form">
+
+                        @using (Html.BeginForm("Create", "Role", FormMethod.Post, new { @class = "cmxform form-horizontal tasi-form", id = "form1" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            @Html.ValidationSummary(true)
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.RoleName, new { @class = "control-label col-lg-1" })
+                                <div class="col-lg-6">
+                                    @Html.TextBoxFor(model => model.RoleName, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.RoleName)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.RoleDescribe, new { @class = "control-label col-lg-1" })
+                                <div class="col-lg-6">
+                                    @Html.TextAreaFor(model => model.RoleDescribe, new { @class = "form-control", @style = "height:100px;" })
+                                    @Html.ValidationMessageFor(model => model.RoleDescribe)
+
+                                    @Html.HiddenFor(model => model.RoleAuthority)
+                                    @Html.ValidationMessageFor(model => model.RoleAuthority)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+
+                                <div class="panel panel-info">
+                                    <header class="panel-heading">
+                                        @Html.DisplayNameFor(model => model.RoleAuthority)
+                                    </header>
+                                    <div class="panel-body">
+                                        <table id="example" class="table table-striped table-hover table-bordered dataTable" aria-describedby="editable-sample_info">
+                                            <thead>
+                                                <tr role="row">
+                                                    <th >功能模块</th>
+                                                    <th>父模块</th>
+                                                    <th >权限设置</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody role="alert" aria-live="polite" aria-relevant="all">
+
+                                                @{int num = 0;}
+
+                                                @foreach (var a in (List<WeiDevUI.Models.MenuModel>)ViewBag.AuthorityList)
+                                                {
+
+                                                        if (a.Item.Count > 0)
+                                                        {
+
+                                                                foreach (var i in a.Item)
+                                                                {
+
+                                                                       if (num % 2 == 0)
+                                                                        {
+                                                                            <tr class="odd">
+                                                                                <td class=" ">
+                                                                                    @i.Name
+                                                                                </td>
+                                                                                <td class=" ">
+                                                                                    @a.Name
+                                                                                </td>
+                                                                                <td class=" ">
+                                                                                    @foreach (var x in i.Authoritys)
+                                                                                    {
+                                                                                        @Html.CheckBox("chk_" + x.ID, x.IsShow, new { @group = @i.ID, @pgroup = @a.ID, @class = "chk" }) @x.Name
+                                                                                      
+                                                                                    }
+                                                                                </td>
+                                                                            </tr>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <tr class="even">
+                                                                                <td class=" ">
+                                                                                    @i.Name
+                                                                                </td>
+                                                                                <td class=" ">
+                                                                                    @a.Name
+                                                                                </td>
+                                                                                <td class=" ">
+                                                                                    @foreach (var x in i.Authoritys)
+                                                                                    {
+                                                                                         @Html.CheckBox("chk_"+x.ID, x.IsShow, new { @group =@i.ID,@pgroup=@a.ID,@class="chk"}) @x.Name
+                                                                                    }
+                                                                                </td>
+                                                                            </tr>
+                                                                        }
+                                                                        num++;
+
+                                                                }
+
+                                                        }
+
+                                                }
+
+                                            </tbody>
+                                        </table>
+
+</div>
+
+
+
+                                </div>
+
+
+
+                            </div>
+
+
+                            <div class="form-group">
+                                <div class="col-lg-offset-2 col-lg-6">
+                                    <input id="btn_save" type="submit" value="保存" class="btn btn-danger" />
+                                    @Html.ActionLink("取消", "Index", null, new { @class = "btn btn-default" })
+                                </div>
+                            </div>
+
+                        }
+
+
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <!-- page end-->
+</section>
+
+
+
+@section Scripts {
+@Scripts.Render("~/bundles/dataTables")
+    @Scripts.Render("~/bundles/validate")
+    <script>
+
+        $(document).ready(function () {
+            $("#form1").validate({
+                rules: {
+                    RoleName: "required"
+                },
+
+                messages: {
+                    RoleName: "角色名称不能为空！"
+                },
+                errorPlacement: function (error, element) {
+                    error.appendTo(element.parent());
+                }
+            });
+
+            $(".chk").click(function () {
+               // alert(this.id);
+                var json = [];
+                //alert($("input[type=checkbox]:checked").length);
+                $(".chk").each(function () {
+
+                    var item = {};
+                    item.ID = this.id.replace('chk_', '');
+                    item.IsShow = $(this).prop("checked");
+                    item.group = $(this).attr("group");
+                    item.pgroup = $(this).attr("pgroup");    
+                    json.push(item);
+              
+                });
+
+                $.ajax({
+                    type: "POST",
+                    // url: "CommonFiles.aspx/DeleteFiles",
+                    url: "/api/roleapi",
+                    //data: "{Id:'" + deleteid + "'}",
+                    data: JSON.stringify({ 'AuthList': json }),//JSON.stringify( { 'ent':  json, 'uid': 1 }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+
+                        // console.log(data);
+                        if (data != null && data != "") {
+                            $("#RoleAuthority").val(data);
+                        }
+                        // alert(data.msg);
+                    },
+                    error: function () {
+                        alert(arguments[1]);
+                    }
+                });
+
+            });
+
+        });
+
+
+        var table = $('#example').DataTable({
+            "columnDefs": [
+                { "visible": false, "targets": 1 }
+            ],
+            "language": {
+                "url": "../Scripts/DataTables-1.10.2/Chinese.txt"
+            },
+            // "order": [[1, 'asc']],
+            "paging":   false,
+            "ordering": false,
+            "info": false,
+            "filter": false,
+           // "bSort": false,
+            "displayLength": 25,
+            "drawCallback": function (settings) {
+                var api = this.api();
+                var rows = api.rows({ page: 'current' }).nodes();
+                var last = null;
+
+                api.column(1, { page: 'current' }).data().each(function (group, i) {
+                    if (last !== group) {
+                        $(rows).eq(i).before(
+                            '<tr class="group"><td colspan="2">' + group + '</td></tr>'
+                        );
+
+                        last = group;
+                    }
+                });
+            }
+        });
+
+
+
+        // Order by the grouping
+        //$('#example tbody').on('click', 'tr.group', function () {
+        //    var currentOrder = table.order()[0];
+        //    if (currentOrder[0] === 1 && currentOrder[1] === 'asc') {
+        //        table.order([1, 'desc']).draw();
+        //    }
+        //    else {
+        //        table.order([1, 'asc']).draw();
+        //    }
+        //});
+
+
+    </script>
+}
+
+
+
+

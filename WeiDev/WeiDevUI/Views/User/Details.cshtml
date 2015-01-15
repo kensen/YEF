@@ -1,0 +1,74 @@
+﻿@model YEF.Models.SysUser
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SysUser</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SysRole.RoleName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SysRole.RoleName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LoginID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoginID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Password)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ADPasswor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ADPasswor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsSPAdmin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsSPAdmin)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SysUserID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

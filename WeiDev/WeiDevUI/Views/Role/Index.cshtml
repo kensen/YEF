@@ -1,0 +1,136 @@
+﻿@model IEnumerable<YEF.Models.SysRole>
+
+@{
+    ViewBag.Title = "角色管理";
+}
+
+
+@section AddToHead{
+    @*<link href="@Url.Content("~/Content/MyStyle.css")" rel="stylesheet" type="text/css" />*@
+    @Styles.Render("~/DT/css")
+}
+
+
+<section class="wrapper site-min-height">
+
+    <aside>
+        <h4 class="drg-event-title"><i class="fa fa-user"></i> 角色管理 </h4>
+
+    </aside>
+
+    <!-- page start-->
+    <section class="panel">
+
+        <header class="panel-heading">
+            <div class="clearfix">
+                <div class="btn-group">
+                    <a href="@Url.Action("Create")" class="btn btn-primary">
+                        <i class="fa fa-plus"></i> 新增
+                    </a>
+
+
+                </div>
+                <div class="btn-group pull-right">
+                    <button data-toggle="dropdown" class="btn dropdown-toggle">
+                        Tools <i class="fa fa-angle-down"></i>
+                    </button>
+                    <ul class="dropdown-menu pull-right">
+                        <li><a href="#">Print</a></li>
+                        <li><a href="#">Save as PDF</a></li>
+                        <li><a href="#">Export to Excel</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        <div class="panel-body">
+            <div class="adv-table editable-table ">
+
+                <div class="space15"></div>
+                <div role="grid" class="dataTables_wrapper form-inline" id="editable-sample_wrapper">
+
+
+                    <table id="editable-sample" class="table table-striped table-hover table-bordered dataTable" aria-describedby="editable-sample_info">
+                        <thead>
+                            <tr role="row">
+                                <th class="sorting" role="columnheader" rowspan="1" colspan="1" aria-label="Username">@Html.DisplayNameFor(model => model.RoleName)</th>
+                                <th class="sorting" role="columnheader" tabindex="0" aria-controls="editable-sample" rowspan="1" colspan="1">@Html.DisplayNameFor(model => model.RoleDescribe)</th>
+                        
+                                <th class="sorting" role="columnheader" tabindex="0" aria-controls="editable-sample" rowspan="1" colspan="1">操作</th>
+                            </tr>
+                        </thead>
+
+                        <tbody role="alert" aria-live="polite" aria-relevant="all">
+
+                            @{int num = 0;}
+
+                            @foreach (var item in Model)
+                            {
+
+
+                                if (num % 2 == 0)
+                                {
+                                    <tr class="odd">
+                                        <td class=" ">
+                                            @Html.DisplayFor(modelItem => item.RoleName)
+                                        </td>
+                                        <td class=" ">
+                                            @Html.DisplayFor(modelItem => item.RoleDescribe)
+                                        </td>
+
+                                        @*<td class=" ">
+                                                <button class="btn btn-success btn-xs" title="查看" value="查看" ><i class="fa fa-check"></i></button>
+
+                                                <button class="btn btn-primary btn-xs" title="编辑">@Html.ActionLink("编辑", "Edit", new { id = item.SysUserID }) <i class="fa fa-pencil"></i></button>
+                                                <button class="btn btn-danger btn-xs" title="删除"><i class="fa fa-trash-o "></i></button>
+                                            </td>*@
+
+                                        <td class=" " style="width:100px;">
+                                            <a href="@Url.Action("Details", new { id = item.SysRoleID })" class="btn btn-success btn-xs"><i class="fa  fa-check"></i></a>
+                                            <a href="@Url.Action("Edit", new { id = item.SysRoleID })" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+                                            <a href="@Url.Action("Delete", new { id = item.SysRoleID })" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
+
+
+                                        </td>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    <tr class="even">
+                                        <td class=" ">
+                                            @Html.DisplayFor(modelItem => item.RoleName)
+                                        </td>
+                                        <td class=" ">
+                                            @Html.DisplayFor(modelItem => item.RoleDescribe)
+                                        </td>
+                                        <td class=" ">
+                                            <a href="@Url.Action("Details", new { id = item.SysRoleID })" class="btn btn-success btn-xs"><i class="fa  fa-check"></i></a>
+                                            <a href="@Url.Action("Edit", new { id = item.SysRoleID })" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+                                            <a href="@Url.Action("Delete", new { id = item.SysRoleID })" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
+
+                                        </td>
+                                        @*<td class=" ">
+                                                @Html.ActionLink("Edit", "Edit", new { id = item.SysUserID }) |
+                                                @Html.ActionLink("Details", "Details", new { id = item.SysUserID }) |
+                                                @Html.ActionLink("Delete", "Delete", new { id = item.SysUserID })
+                                            </td>*@
+                                    </tr>
+                                }
+
+                                num++;
+                            }
+
+
+                        </tbody>
+                    </table>
+           
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- page end-->
+</section>
+
+@section Scripts{@{Html.RegisterMvcPagerScriptResource();}}
+<!--===================-->
+
+

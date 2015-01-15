@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<data>
+  
+	  <type  name="UserType" cname="用户类型" >
+	      <item value="1">管理员用户</item>
+	      <item value="2">普通用户</item>        
+	  </type>
+  
+</data>
