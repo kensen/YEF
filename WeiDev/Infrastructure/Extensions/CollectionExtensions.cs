@@ -4,6 +4,8 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using YEF.Infrastructure.Data;
+using YEF.Utility;
 
 namespace YEF.Infrastructure.Extensions
 {
@@ -60,17 +62,17 @@ namespace YEF.Infrastructure.Extensions
             source = source.Where(predicate);
             if (sortConfigs == null || sortConfigs.Length == 0)
             {
-                source = source.OrderBy(m => m.Id);
+                source = source.OrderBy(m => m.ID);
             }
             else
             {
                 int count = 0;
                 IOrderedQueryable<TEntity> orderSource = null;
-                foreach (SortCondition sortCondition in sortConfigs)
+                foreach (SortConfig sortConfig in sortConfigs)
                 {
                     orderSource = count == 0
-                        ? QueryablePropertySorter<TEntity>.OrderBy(source, sortCondition.SortField, sortCondition.ListSortDirection)
-                        : QueryablePropertySorter<TEntity>.ThenBy(orderSource, sortCondition.SortField, sortCondition.ListSortDirection);
+                        ? QueryablePropertySorter<TEntity>.OrderBy(source, sortConfig.SortField, sortConfig.ListSortDirection)
+                        : QueryablePropertySorter<TEntity>.ThenBy(orderSource, sortConfig.SortField, sortConfig.ListSortDirection);
                     count++;
                 }
                 source = orderSource;
