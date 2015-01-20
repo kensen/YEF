@@ -6,10 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 using YEF.Infrastructure.Data;
 using YEF.Utility;
+using YEF.Utility.Data;
+using YEF.Utility.Filter;
 
 namespace YEF.Infrastructure.Extensions
 {
-    public class CollectionExtensions
+    public static class CollectionExtensions
     {
         /// <summary>
         /// 从指定<see cref="IQueryable{T}"/>集合 中查询指定分页条件的子数据集
@@ -30,7 +32,7 @@ namespace YEF.Infrastructure.Extensions
             predicate.CheckNotNull("predicate");
             pageConfig.CheckNotNull("pageCondition");
 
-            return source.Where<TEntity, TKey>(predicate, pageConfig.PageIndex, pageConfig.PageSize, out total, pageConfig.SortConditions);
+            return source.Where<TEntity, TKey>(predicate, pageConfig.PageIndex, pageConfig.PageSize, out total, pageConfig.SortConfigs);
         }
 
 

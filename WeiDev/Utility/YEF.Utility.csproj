@@ -40,7 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\PageConfig.cs" />
+    <Compile Include="Data\SortConfig.cs" />
+    <Compile Include="Extensions\CollectionExtensions.cs" />
     <Compile Include="Extensions\ParamterCheckExtensions.cs" />
+    <Compile Include="Filter\QueryablePropertySorter.cs" />
     <Compile Include="Msgs\OperationResult.cs" />
     <Compile Include="Msgs\OperationResultType.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

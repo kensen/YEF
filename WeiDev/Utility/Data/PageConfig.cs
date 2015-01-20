@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace YEF.Infrastructure
+namespace YEF.Utility.Data
 {
    public class PageConfig
     {

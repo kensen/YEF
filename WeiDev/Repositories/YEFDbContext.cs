@@ -10,6 +10,7 @@ using YEF.Infrastructure;
 using YEF.Infrastructure.Data;
 using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace YEF.Repositories
 {
@@ -83,6 +84,19 @@ namespace YEF.Repositories
                {
                    Configuration.ValidateOnSaveEnabled = !validateOnSaveEnabled;
                }
+           }
+       }
+
+       protected override void OnModelCreating(DbModelBuilder modelBuilder)
+       {
+           //移除一对多的级联删除
+           modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+
+           //注册实体配置信息
+           ICollection<IEntityMapper> entityMappers = DatabaseInitializer.EntityMappers;
+           foreach (IEntityMapper mapper in entityMappers)
+           {
+               mapper.RegistTo(modelBuilder.Configurations);
            }
        }
     }
