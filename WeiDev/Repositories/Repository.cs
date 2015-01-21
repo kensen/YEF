@@ -7,7 +7,11 @@ using System.Threading.Tasks;
 using YEF.Infrastructure.Data;
 using YEF.Utility;
 using YEF.Utility.Msgs;
+using YEF.Utility.Extensions;
+
 using AutoMapper;
+using System.Linq.Expressions;
+using System.Data.Entity.Infrastructure;
 namespace YEF.Repositories
 {
     public class Repository<TEntity,TKey>:IRepository<TEntity,TKey> where TEntity:EntityBase<TKey>
@@ -28,7 +32,7 @@ namespace YEF.Repositories
         /// </summary>
         public IQueryable<TEntity> Entities
         {
-            get { return_dbSet; }
+            get { return _dbSet; }
         }
 
         /// <summary>
@@ -99,71 +103,189 @@ namespace YEF.Repositories
             }
             int count = SaveChanges();
             return count>0?new OperationResult(OperationResultType.Success,
-                names.Count>0?
+                names.Count>0
                      ? "信息“{0}”添加成功".FormatWith(names.ExpandAndToString())
                         : "{0}个信息添加成功".FormatWith(dtos.Count))
-            ：new OperationResult(OperationResultType.NoChanged);
+                        :new OperationResult(OperationResultType.NoChanged);
 
         }
 
         public int Delete(TEntity entity)
         {
-            throw new NotImplementedException();
+            entity.CheckNotNull("entity");
+            _dbSet.Remove(entity);
+            return SaveChanges();
         }
 
         public int Delete(TKey key)
         {
-            throw new NotImplementedException();
+           CheckEntityKey(key,"key");
+            TEntity entity=_dbSet.Find(key);
+            return entity==null?0:Delete(entity);
         }
 
-        public int Delete(System.Linq.Expressions.Expression<Func<TEntity, bool>> predicate)
+        public int Delete(Expression<Func<TEntity, bool>> predicate)
         {
-            throw new NotImplementedException();
+          predicate.CheckNotNull("predicate");
+            TEntity[] entities=_dbSet.Where(predicate).ToArray();
+            return entities.Length ==0?0:Delete(entities);
         }
 
         public int Delete(IEnumerable<TEntity> entities)
         {
-            throw new NotImplementedException();
+            entities=entities as TEntity[]??entities.ToArray();
+            _dbSet.RemoveRange(entities);
+            return SaveChanges();
         }
 
-        public Utility.Msgs.OperationResult Delete(ICollection<TKey> ids, Action<TEntity> checkAction = null, Func<TEntity, TEntity> deleteFunc = null)
+        public OperationResult Delete(ICollection<TKey> ids, Action<TEntity> checkAction = null, Func<TEntity, TEntity> deleteFunc = null)
         {
-            throw new NotImplementedException();
+            ids.CheckNotNull("ids");
+            List<string> names=new List<string>();
+           
+                foreach(var id in ids){
+
+                    TEntity entity=_dbSet.Find(id);
+                    try
+                    {
+                         if(checkAction !=null)
+                         {
+                               checkAction(entity);
+                         }
+                        if(deleteFunc!=null)
+                        {
+                            entity=deleteFunc(entity);
+                        }
+                  
+                     }
+                    catch(Exception ex)
+                    {
+                        return new OperationResult(OperationResultType.Error,ex.Message);
+                     }
+                    _dbSet.Remove(entity);
+                    string name=GetNameValue(entity);
+
+                    if(name !=null){
+                        names.Add(name);
+                    }
+                }
+
+            int count=SaveChanges();
+            return count > 0 ? new OperationResult(OperationResultType.Success,
+                names.Count>0
+                 ? "信息“{0}”删除成功".FormatWith(names.ExpandAndToString())
+                        : "{0}个信息删除成功".FormatWith(ids.Count))
+                        : new OperationResult(OperationResultType.NoChanged);
+         
         }
 
         public int Update(TEntity entity)
         {
-            throw new NotImplementedException();
+           entity.CheckNotNull("entity");
+           ( (DbContext)_unitOfWork).Update<TEntity,TKey>(entity);
+           return SaveChanges();
         }
 
-        public int Update(System.Linq.Expressions.Expression<Func<TEntity, object>> propertyExpresion, params TEntity[] entities)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyExpresion"></param>
+        /// <param name="entities"></param>
+        /// <returns></returns>
+        public int Update(Expression<Func<TEntity, object>> propertyExpresion, params TEntity[] entities)
         {
-            throw new NotImplementedException();
+            propertyExpresion.CheckNotNull("propertyExpresion");
+            entities.CheckNotNull("entities");
+            YEFDbContext context = new YEFDbContext();
+            context.Update<TEntity, TKey>(propertyExpresion, entities);
+            try
+            {
+                return context.SaveChanges(false);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                TKey[] ids = entities.Select(m => m.ID).ToArray();
+                context.Set<TEntity>().Where(m => ids.Contains(m.ID)).Load();
+                context.Update<TEntity, TKey>(propertyExpresion, entities);
+                return context.SaveChanges(false);
+            }
         }
 
-        public Utility.Msgs.OperationResult Update<TEditDto>(ICollection<TEditDto> dtos, Action<TEditDto> checkAction = null, Func<TEditDto, TEntity, TEntity> updateFunc = null) where TEditDto : IEditDto<TKey>
+        public OperationResult Update<TEditDto>(ICollection<TEditDto> dtos, Action<TEditDto> checkAction = null, Func<TEditDto, TEntity, TEntity> updateFunc = null) where TEditDto : IEditDto<TKey>
         {
-            throw new NotImplementedException();
+            dtos.CheckNotNull("dtos");
+            List<string> names = new List<string>();
+            foreach (var dto in dtos)
+            {
+                TEntity entity = _dbSet.Find(dto.Id);
+                if(entity ==null)
+                {
+                    return new OperationResult(OperationResultType.QueryNull);
+                }
+                entity = Mapper.Map(dto, entity);
+
+                try
+                {
+                    if(checkAction !=null)
+                    {
+                        checkAction(dto);
+                    }
+                    if(updateFunc!=null)
+                    {
+                        entity = updateFunc(dto, entity);
+                    }
+                }
+                catch(Exception ex)
+                {
+                    return new OperationResult(OperationResultType.Error, ex.Message);
+
+                }
+                ((DbContext)_unitOfWork).Update<TEntity, TKey>(entity);
+                string name = GetNameValue(dto);
+                if(name !=null)
+                {
+                    names.Add(name);
+                }
+
+            }
+
+            int count = SaveChanges();
+            return count > 0 ? new OperationResult(OperationResultType.Success,
+                names.Count > 0
+                ? "信息“{0}”更新成功".FormatWith(names.ExpandAndToString())
+                : "{0}个信息更新成功".FormatWith(dtos.Count))
+                : new OperationResult(OperationResultType.NoChanged);
         }
 
-        public bool ExistsCheck(System.Linq.Expressions.Expression<Func<TEntity, bool>> predicate, TKey id = default(TKey))
+        public bool ExistsCheck(Expression<Func<TEntity, bool>> predicate, TKey id = default(TKey))
         {
-            throw new NotImplementedException();
+            TKey defaultId = default(TKey);
+            var entity = _dbSet.Where(predicate).Select(m => new { m.ID }).SingleOrDefault();
+            bool exists = id.Equals(defaultId) ? entity != null : entity != null && entity.ID.Equals(defaultId);
+            return exists;
         }
 
         public TEntity GetByKey(TKey key)
         {
-            throw new NotImplementedException();
+            CheckEntityKey(key, "key");
+            return _dbSet.Find(key);
         }
 
-        public IQueryable<TEntity> GetInclude<TProperty>(System.Linq.Expressions.Expression<Func<TEntity, TProperty>> path)
+        public IQueryable<TEntity> GetInclude<TProperty>(Expression<Func<TEntity, TProperty>> path)
         {
-            throw new NotImplementedException();
+            path.CheckNotNull("path");
+            return _dbSet.Include(path);
         }
 
         public IQueryable<TEntity> GetIncludes(params string[] paths)
         {
-            throw new NotImplementedException();
+            paths.CheckNotNull("paths");
+            IQueryable<TEntity> source = _dbSet;
+            foreach (var path in paths)
+            {
+                source = source.Include(path);
+            }
+            return source;
         }
 
 

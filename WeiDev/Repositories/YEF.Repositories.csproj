@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="DatabaseInitializer.cs" />
     <Compile Include="DataHelper.cs" />
+    <Compile Include="Extensions\DbContextExtensions.cs" />
     <Compile Include="Migrations\CreateNewDataBase.cs" />
     <Compile Include="Migrations\IDataInitialize.cs" />
     <Compile Include="Migrations\ISeedAction.cs" />

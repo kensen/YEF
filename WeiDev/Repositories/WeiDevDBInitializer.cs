@@ -23,7 +23,7 @@ namespace YEF.Repositories
                 context.SaveChanges();
                 var sysUsers = new List<SysUser>
                 {
-                new SysUser{ UserName="Admin",LoginID="Admin",Password=MD5Class.GetMD5("123456"), ADPasswor=MD5Class.GetMD5("123456"),  IsSPAdmin=true, SysRoleID=1}
+                new SysUser{ UserName="Admin",LoginID="Admin",Password=MD5Class.GetMd5("123456"), ADPasswor=MD5Class.GetMd5("123456"),  IsSPAdmin=true, SysRoleID=1}
           
                 };
 
