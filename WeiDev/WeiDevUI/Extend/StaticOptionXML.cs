@@ -4,12 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Xml.Linq;
 using YEF.Utility;
-using WeiDevUI.Models;
-
+using YEF.AppServices.ViewModels;
+using YEF.Utility.Extensions;
+using YEF.Utility.Data;
 
 namespace WeiDevUI
 {
-    public class StaticOptionXML:XmlHelp
+    public class StaticOptionXML:XmlBase
     {
         public StaticOptionXML()
         {
@@ -31,11 +32,11 @@ namespace WeiDevUI
             xq.pstrAtt.Add("name", pid);
             // IEnumerable<XElement> newlist = GetElement(xq);
             //  return newlist;
-
+            
             List<StaticOptionModel> mList = new List<StaticOptionModel>();
             try
             {
-                foreach (var m in GetElement(xq))
+                foreach (var m in  XML.QueryElements(xq))
                 {
                     StaticOptionModel model = new StaticOptionModel();
                     model.ShowName = m.Value;
@@ -71,7 +72,7 @@ namespace WeiDevUI
             xq.strAtt.Add("value", itemval);
             try
             {
-                return GetElement(xq).First().Value;
+                return XML.QueryElements(xq).First().Value;
             }
             catch (Exception ex)
             {

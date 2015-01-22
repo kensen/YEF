@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using YEF.Models;
 using YEF.Repositories;
-using WeiDevUI.Models;
+using YEF.AppServices.ViewModels;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 

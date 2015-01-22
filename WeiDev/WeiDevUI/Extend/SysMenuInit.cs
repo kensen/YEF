@@ -4,11 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Xml.Linq;
 using YEF.Utility;
-using WeiDevUI.Models;
-
+using YEF.AppServices.ViewModels;
+using YEF.Utility.Data;
+using YEF.Utility.Extensions;
 namespace WeiDevUI
 {
-    public class SysMenuInit:XmlHelp
+    public class SysMenuInit:XmlBase
     {
 
 
@@ -37,11 +38,11 @@ namespace WeiDevUI
             //xq.strAtt.Add("IsShow", "1");
            // IEnumerable<XElement> newlist = GetElement(xq);
           //  return newlist;
-
+            
             List<MenuModel> mList = new List<MenuModel>();
             try
             {
-                foreach (var m in GetElement(xq))
+                foreach (var m in XML.QueryElements(xq))
                 {
                     MenuModel model = new MenuModel();
                     model.ID = m.Attribute("Id").Value;
@@ -103,7 +104,7 @@ namespace WeiDevUI
             List<MenuModel> mList = new List<MenuModel>();
             try
             {
-                foreach (var m in GetElement(xq))
+                foreach (var m in XML.QueryElements(xq))
                 {
                     MenuModel model = new MenuModel();
                     model.ID = m.Attribute("Id").Value;
@@ -173,7 +174,7 @@ namespace WeiDevUI
             List<MenuModel> mList = new List<MenuModel>();
             try
             {
-                foreach (var m in GetElement(xq))
+                foreach (var m in XML.QueryElements(xq))
                 {
                     string attval= m.Attribute("Id").Value;
                     m.SetAttributeValue("IsShow", MenuLists.Where(p => p.ID == attval).First().IsShow==true ? "1" : "0");

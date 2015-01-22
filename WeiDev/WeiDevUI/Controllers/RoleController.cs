@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using YEF.Models;
 using YEF.Repositories;
-using WeiDevUI.Models;
+using YEF.AppServices.ViewModels;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 

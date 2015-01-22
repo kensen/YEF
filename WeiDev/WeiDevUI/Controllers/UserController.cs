@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using WeiDevUI.Models;
+using YEF.AppServices.ViewModels;
 using YEF.Models;
 using YEF.Repositories;
 using YEF.Utility;
@@ -74,7 +74,7 @@ namespace WeiDevUI.Controllers
             if (ModelState.IsValid)
             {
                 //sysuser.Password = MD5Class.GetMD5(sysuser.Password);
-                sysuser.Password = MD5Class.GetMD5("123456");
+                sysuser.Password = MD5Class.GetMd5("123456");
                 sysuser.ADPasswor = sysuser.Password;
                 db.SysUsers.Add(sysuser);
                 db.SaveChanges();
