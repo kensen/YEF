@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Namespace="Model1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
+        <EntityContainer Name="Model1TargetContainer" >
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="Model1Container" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="SysUsersSet" EntityType="Model1.SysUsers" />
+          <EntitySet Name="SysOrganizationsSet" EntityType="Model1.SysOrganizations" />
+          <AssociationSet Name="SysOrganizationsSysUsers" Association="Model1.SysOrganizationsSysUsers">
+            <End Role="SysOrganizations" EntitySet="SysOrganizationsSet" />
+            <End Role="SysUsers" EntitySet="SysUsersSet" />
+          </AssociationSet>
+          <EntitySet Name="SysRolesSet" EntityType="Model1.SysRoles" />
+          <AssociationSet Name="SysOrganizationsSysRoles" Association="Model1.SysOrganizationsSysRoles">
+            <End Role="SysOrganizations" EntitySet="SysOrganizationsSet" />
+            <End Role="SysRoles" EntitySet="SysRolesSet" />
+          </AssociationSet>
+          <AssociationSet Name="SysUsersSysRoles" Association="Model1.SysUsersSysRoles">
+            <End Role="SysUsers" EntitySet="SysUsersSet" />
+            <End Role="SysRoles" EntitySet="SysRolesSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="SysUsers">
+          <Documentation>
+            <Summary>系统用户表</Summary>
+            <LongDescription>系统用户实体
+包含用户名、登陆账号、用户类型、是否是超级管理员等
+</LongDescription>
+          </Documentation>
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" >
+            <Documentation>
+              <Summary>用户名</Summary>
+              <LongDescription>用户名</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Name="LoginID" Type="String" Nullable="false" >
+            <Documentation>
+              <Summary>登录ID</Summary>
+              <LongDescription>登录ID</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Name="Password" Type="String" Nullable="false" >
+            <Documentation>
+              <Summary>密码</Summary>
+              <LongDescription>密码</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Name="ADPassword" Type="String" Nullable="false" >
+            <Documentation>
+              <Summary>后台管理员密码</Summary>
+              <LongDescription>后台管理员密码</LongDescription>
+            </Documentation>
+          </Property>
+          <Property Name="UserType" Type="Model1.UserTypeEnum" Nullable="false" >
+            <Documentation>
+              <Summary>用户类型</Summary>
+              <LongDescription>用户类型</LongDescription>
+            </Documentation>
+          </Property>
+          <NavigationProperty Name="SysOrganizations" Relationship="Model1.SysOrganizationsSysUsers" FromRole="SysUsers" ToRole="SysOrganizations" />
+          <NavigationProperty Name="SysRoles" Relationship="Model1.SysUsersSysRoles" FromRole="SysUsers" ToRole="SysRoles" />
+          <Property Name="IsSPAdmin" Type="Boolean" Nullable="false" DefaultValue="false" >
+            <Documentation>
+              <Summary>是否是超级管理员</Summary>
+              <LongDescription>是否是超级管理员</LongDescription>
+            </Documentation>
+          </Property>
+        </EntityType>
+        <EnumType Name="UserTypeEnum" UnderlyingType="Byte">
+          <Member Name="Admin" />
+          <Member Name="User" />
+        </EnumType>
+        <EntityType Name="SysOrganizations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Describe" Type="String" Nullable="false" />
+          <NavigationProperty Name="SysUsers" Relationship="Model1.SysOrganizationsSysUsers" FromRole="SysOrganizations" ToRole="SysUsers" />
+          <NavigationProperty Name="SysRoles" Relationship="Model1.SysOrganizationsSysRoles" FromRole="SysOrganizations" ToRole="SysRoles" />
+        </EntityType>
+        <Association Name="SysOrganizationsSysUsers">
+          <End Type="Model1.SysOrganizations" Role="SysOrganizations" Multiplicity="0..1" />
+          <End Type="Model1.SysUsers" Role="SysUsers" Multiplicity="*" />
+        </Association>
+        <EntityType Name="SysRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" Nullable="false" />
+          <Property Name="RoleDescribe" Type="String" Nullable="false" />
+          <Property Name="RoleAuthority" Type="String" Nullable="false" />
+          <NavigationProperty Name="SysOrganizations" Relationship="Model1.SysOrganizationsSysRoles" FromRole="SysRoles" ToRole="SysOrganizations" />
+          <NavigationProperty Name="SysUsers" Relationship="Model1.SysUsersSysRoles" FromRole="SysRoles" ToRole="SysUsers" />
+        </EntityType>
+        <Association Name="SysOrganizationsSysRoles">
+          <End Type="Model1.SysOrganizations" Role="SysOrganizations" Multiplicity="1" />
+          <End Type="Model1.SysRoles" Role="SysRoles" Multiplicity="*" />
+        </Association>
+        <Association Name="SysUsersSysRoles">
+          <End Type="Model1.SysUsers" Role="SysUsers" Multiplicity="1" />
+          <End Type="Model1.SysRoles" Role="SysRoles" Multiplicity="0..1" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
+        <Alias Key="Model" Value="Model1" />
+        <Alias Key="Target" Value="Model1.Store" />
+        <EntityContainerMapping CdmEntityContainer="Model1Container" StorageEntityContainer="Model1TargetContainer">
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

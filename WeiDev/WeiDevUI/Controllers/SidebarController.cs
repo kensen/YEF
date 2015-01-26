@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using YEF.AppServices.Services.System;
 
 
 namespace WeiDevUI.Controllers
@@ -19,7 +20,7 @@ namespace WeiDevUI.Controllers
         public ActionResult Header()
         {
             ViewBag.Message = "Your application description page.";
-            ViewBag.Title = "WeiDev";
+            ViewBag.Title = "YEFDev";
 
            
 
@@ -33,9 +34,12 @@ namespace WeiDevUI.Controllers
 
         public ActionResult Menu(string c="",string a="")
         {
-            SysMenuInit minit = new SysMenuInit();
+          //  SysMenuInit minit = new SysMenuInit();
+            IMenu menu = new MenuService();
 
-            var obj = minit.GetModelList(c,a);
+            menu.InitXML();
+
+            var obj = menu.GetMenuList(c, a);
 
            
 
