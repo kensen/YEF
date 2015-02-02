@@ -14,12 +14,17 @@ namespace YEF.Models.EDMXDesign
     
     public partial class SysRoles
     {
+        public SysRoles()
+        {
+            this.SysUsers = new HashSet<SysUsers>();
+        }
+    
         public int Id { get; set; }
         public string RoleName { get; set; }
         public string RoleDescribe { get; set; }
         public string RoleAuthority { get; set; }
     
         public virtual SysOrganizations SysOrganizations { get; set; }
-        public virtual SysUsers SysUsers { get; set; }
+        public virtual ICollection<SysUsers> SysUsers { get; set; }
     }
 }

@@ -204,8 +204,8 @@ namespace YEF.Repositories
             }
             catch (DbUpdateConcurrencyException)
             {
-                TKey[] ids = entities.Select(m => m.ID).ToArray();
-                context.Set<TEntity>().Where(m => ids.Contains(m.ID)).Load();
+                TKey[] ids = entities.Select(m => m.Id).ToArray();
+                context.Set<TEntity>().Where(m => ids.Contains(m.Id)).Load();
                 context.Update<TEntity, TKey>(propertyExpresion, entities);
                 return context.SaveChanges(false);
             }
@@ -260,7 +260,7 @@ namespace YEF.Repositories
         public bool ExistsCheck(Expression<Func<TEntity, bool>> predicate, TKey id = default(TKey))
         {
             TKey defaultId = default(TKey);
-            var entity = _dbSet.Where(predicate).Select(m => new { m.ID }).SingleOrDefault();
+            var entity = _dbSet.Where(predicate).Select(m => new { ID = m.Id }).SingleOrDefault();
             bool exists = id.Equals(defaultId) ? entity != null : entity != null && entity.ID.Equals(defaultId);
             return exists;
         }

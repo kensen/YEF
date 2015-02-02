@@ -40,7 +40,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserName" Type="String" Nullable="false" >
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="100" >
             <Documentation>
               <Summary>用户名</Summary>
               <LongDescription>用户名</LongDescription>
@@ -113,7 +113,7 @@
           <End Type="Model1.SysRoles" Role="SysRoles" Multiplicity="*" />
         </Association>
         <Association Name="SysUsersSysRoles">
-          <End Type="Model1.SysUsers" Role="SysUsers" Multiplicity="1" />
+          <End Type="Model1.SysUsers" Role="SysUsers" Multiplicity="*" />
           <End Type="Model1.SysRoles" Role="SysRoles" Multiplicity="0..1" />
         </Association>
       </Schema>

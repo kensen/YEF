@@ -23,7 +23,7 @@ namespace YEF.Infrastructure.Data
         /// 动态主键类型
         /// </summary>
         [Key]
-        public TKey ID { get; set; }
+        public TKey Id { get; set; }
 
         /// <summary>
         /// 伪删除
@@ -54,7 +54,7 @@ namespace YEF.Infrastructure.Data
             {
                 return false;
             }
-            return ID.Equals(entity.ID);
+            return Id.Equals(entity.Id);
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace YEF.Infrastructure.Data
         /// </returns>
         public override int GetHashCode()
         {
-            return ID.GetHashCode() ^ AddTime.GetHashCode();
+            return Id.GetHashCode() ^ AddTime.GetHashCode();
         }
 
         #endregion

@@ -64,7 +64,7 @@ namespace YEF.Infrastructure.Extensions
             source = source.Where(predicate);
             if (sortConfigs == null || sortConfigs.Length == 0)
             {
-                source = source.OrderBy(m => m.ID);
+                source = source.OrderBy(m => m.Id);
             }
             else
             {
