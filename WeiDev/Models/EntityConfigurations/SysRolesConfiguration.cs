@@ -9,7 +9,7 @@ namespace YEF.Models.EntityConfigurations
 {
    public  class SysRolesConfiguration:EntityConfigurationBase<SysRoles,int>
     {
-       public SysOrganizationConfiguration()
+       public SysRolesConfiguration()
        {
            HasOptional(m=>m.SysOrganizations).WithMany(n=>n.SysRoles);
        }

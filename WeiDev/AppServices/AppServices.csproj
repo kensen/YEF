@@ -30,6 +30,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=3.3.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\AutoMapper.3.3.0\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\packages\AutoMapper.3.3.0\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -51,7 +58,11 @@
     <Compile Include="Services\System\IStaticOption.cs" />
     <Compile Include="Services\System\MenuService.cs" />
     <Compile Include="Services\System\StaticOptionService.cs" />
+    <Compile Include="Services\User\IOrganizationService.cs" />
+    <Compile Include="ViewModels\Dto\DtoMappers.cs" />
     <Compile Include="ViewModels\Dto\User\AccountDto.cs" />
+    <Compile Include="ViewModels\Dto\User\OrganizationDto.cs" />
+    <Compile Include="ViewModels\Dto\User\RoleDto.cs" />
     <Compile Include="ViewModels\Dto\User\UserDto.cs" />
     <Compile Include="ViewModels\System\MenuModel.cs" />
     <Compile Include="ViewModels\System\StaticOptionModel.cs" />
@@ -79,6 +90,7 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\AutoMapper.3.3.0\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.0\tools\AutoMapper.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

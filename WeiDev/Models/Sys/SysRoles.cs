@@ -15,7 +15,7 @@ namespace YEF.Models
             this.SysUsers = new HashSet<SysUsers>();
         }
 
-       [Display("角色名称")]
+       [Display(Name = "角色名称")]
        [Required ,StringLength(200)]
         public string RoleName { get; set; }
         public string RoleDescribe { get; set; }

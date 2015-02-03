@@ -17,18 +17,18 @@ namespace YEF.AppServices.ViewModels
 
         public string LoginID { get; set; }
 
-        [Display("密码")]
+        [Display(Name = "密码")]
         [StringLength(50)]
         public string Password { get; set; }
 
-        [Display("后台密码")]
+        [Display(Name = "后台密码")]
         [StringLength(50)]
         public string ADPassword { get; set; }
 
         [Required]
         public UserTypeEnum UserType { get; set; }
 
-        [Display("是否是超级管理员")]
+        [Display(Name = "是否是超级管理员")]
         public bool IsSPAdmin { get; set; }
 
         //public virtual SysOrganizations SysOrganizations { get; set; }

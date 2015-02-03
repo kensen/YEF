@@ -16,11 +16,11 @@ namespace YEF.Models
             this.SysRoles = new HashSet<SysRoles>();
         }
 
-       [Display("组织名称")]
+       [Display(Name = "组织名称")]
        [Required,StringLength(200)]
         public string Name { get; set; }
 
-       [Display("组织描述")]
+       [Display(Name = "组织描述")]
         public string Describe { get; set; }
 
         public virtual ICollection<SysUsers> SysUsers { get; set; }

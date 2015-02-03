@@ -16,11 +16,11 @@ namespace YEF.AppServices.ViewModels
         /// </summary>
         public Guid Id { get; set; }
 
-        [Display("用户名")]
+        [Display(Name = "用户名")]
         [Required, StringLength(50)]
         public string UserName { get; set; }
 
-        [Display("登录ID")]
+        [Display(Name = "登录ID")]
         [Required, StringLength(50)]
         public string LoginID { get; set; }
        
@@ -28,7 +28,7 @@ namespace YEF.AppServices.ViewModels
         [Required]
         public UserTypeEnum UserType { get; set; }
 
-        [Display("是否是超级管理员")]
+        [Display(Name = "是否是超级管理员")]
         public bool IsSPAdmin { get; set; }
     }
 }
