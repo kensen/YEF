@@ -6,9 +6,11 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using YEF.AppServices.ViewModels;
+using YEF.AppServices.Services.User;
 using YEF.Models;
 using YEF.Repositories;
-using YEF.AppServices.ViewModels;
+using YEF.Utility;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -16,12 +18,18 @@ namespace WeiDevUI.Controllers
 {
     public class RoleController : Controller
     {
-        private WeiDevContext db = new WeiDevContext();
+       // private WeiDevContext db = new WeiDevContext();
+        private IRoleService _roleService;
+
+        public RoleController(IRoleService roleService)
+        {
+            this._roleService = roleService;
+        }
 
         // GET: /Role/
         public ActionResult Index()
         {
-            return View(db.SysRoles.ToList());
+            return View(_roleService.Role.ToList());
         }
 
         // GET: /Role/Details/5
@@ -31,7 +39,7 @@ namespace WeiDevUI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SysRole sysrole = db.SysRoles.Find(id);
+            SysRoles sysrole =_roleService.Role.Where(m => m.Id == id.Value).First();
             if (sysrole == null)
             {
                 return HttpNotFound();
@@ -53,37 +61,39 @@ namespace WeiDevUI.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Create([Bind(Include="SysRoleID,RoleName,RoleDescribe,RoleAuthority")] SysRole sysrole)
+        public ActionResult Create([Bind(Include="SysRoleID,RoleName,RoleDescribe,RoleAuthority")] SysRoles sysrole)
         {
-            if (ModelState.IsValid)
-            {
-                db.SysRoles.Add(sysrole);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            //if (ModelState.IsValid)
+            //{
+            //    db.SysRoles.Add(sysrole);
+            //    db.SaveChanges();
+            //    return RedirectToAction("Index");
+            //}
 
-            return View(sysrole);
+            //return View(sysrole);
+            return View();
         }
 
         // GET: /Role/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            SysRole sysrole = db.SysRoles.Find(id);
-            if (sysrole == null)
-            {
-                return HttpNotFound();
-            }
-            else
-            {
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+            //SysRole sysrole = db.SysRoles.Find(id);
+            //if (sysrole == null)
+            //{
+            //    return HttpNotFound();
+            //}
+            //else
+            //{
 
-                SysMenuInit minit = new SysMenuInit(sysrole.RoleAuthority);
-                ViewBag.AuthorityList = minit.GetAllRoleAuthorityList();
-            }
-            return View(sysrole);
+            //    SysMenuInit minit = new SysMenuInit(sysrole.RoleAuthority);
+            //    ViewBag.AuthorityList = minit.GetAllRoleAuthorityList();
+            //}
+            //return View(sysrole);
+            return View();
         }
 
         // POST: /Role/Edit/5
@@ -92,15 +102,16 @@ namespace WeiDevUI.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Edit([Bind(Include="SysRoleID,RoleName,RoleDescribe,RoleAuthority")] SysRole sysrole)
+        public ActionResult Edit([Bind(Include="SysRoleID,RoleName,RoleDescribe,RoleAuthority")] SysRoles sysrole)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(sysrole).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(sysrole);
+            //if (ModelState.IsValid)
+            //{
+            //    db.Entry(sysrole).State = EntityState.Modified;
+            //    db.SaveChanges();
+            //    return RedirectToAction("Index");
+            //}
+            //return View(sysrole);
+            return View();
         }
 
         [HttpPost]
@@ -160,16 +171,17 @@ namespace WeiDevUI.Controllers
         // GET: /Role/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            SysRole sysrole = db.SysRoles.Find(id);
-            if (sysrole == null)
-            {
-                return HttpNotFound();
-            }
-            return View(sysrole);
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+            //SysRole sysrole = db.SysRoles.Find(id);
+            //if (sysrole == null)
+            //{
+            //    return HttpNotFound();
+            //}
+            //return View(sysrole);
+            return View();
         }
 
         // POST: /Role/Delete/5
@@ -177,18 +189,18 @@ namespace WeiDevUI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            SysRole sysrole = db.SysRoles.Find(id);
-            db.SysRoles.Remove(sysrole);
-            db.SaveChanges();
+            //SysRole sysrole = db.SysRoles.Find(id);
+            //db.SysRoles.Remove(sysrole);
+            //db.SaveChanges();
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
+            //if (disposing)
+            //{
+            //    db.Dispose();
+            //}
             base.Dispose(disposing);
         }
     }

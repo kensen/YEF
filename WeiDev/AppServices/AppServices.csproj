@@ -59,6 +59,11 @@
     <Compile Include="Services\System\MenuService.cs" />
     <Compile Include="Services\System\StaticOptionService.cs" />
     <Compile Include="Services\User\IOrganizationService.cs" />
+    <Compile Include="Services\User\IRoleService.cs" />
+    <Compile Include="Services\User\IUserService.cs" />
+    <Compile Include="Services\User\OrganizationService.cs" />
+    <Compile Include="Services\User\RolesService.cs" />
+    <Compile Include="Services\User\UsersService.cs" />
     <Compile Include="ViewModels\Dto\DtoMappers.cs" />
     <Compile Include="ViewModels\Dto\User\AccountDto.cs" />
     <Compile Include="ViewModels\Dto\User\OrganizationDto.cs" />

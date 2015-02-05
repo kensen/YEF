@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using YEF.Infrastructure.Data;
 
+
 namespace YEF.Models
 {
     public enum UserTypeEnum : byte
@@ -17,7 +18,7 @@ namespace YEF.Models
     {
         public SysUsers()
         {
-            this.IsSPAdmin = false;
+            this.IsSPAdmin = false;            
             this.UserType = UserTypeEnum.User;
         }
         [Display(Name = "用户名")]

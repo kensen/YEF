@@ -13,8 +13,8 @@ namespace YEF.Repositories
     {
        public WeiDevContext() : base("YEFDBContext") { }
 
-       public DbSet<SysUser> SysUsers { get; set; }
-       public DbSet<SysRole> SysRoles { get; set; }
+       public DbSet<SysUsers> SysUsers { get; set; }
+       public DbSet<SysRoles> SysRoles { get; set; }
      
 
        protected override void OnModelCreating(DbModelBuilder modelBuilder)
