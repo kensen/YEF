@@ -37,6 +37,10 @@ namespace YEF.Repositories
             if (!context.Database.Exists())
             {
                 initializer = new CreateNewDataBase();
+                CreateNewDataBase.SeedActions.Add(new YEFOrganizationsSeedAction());
+                CreateNewDataBase.SeedActions.Add(new YEFRoleSeedAction());
+                CreateNewDataBase.SeedActions.Add(new YEFUserSeedAction());
+              
             }
             else
             {

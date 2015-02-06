@@ -21,6 +21,6 @@ namespace YEF.Repositories.Migrations
         /// 定义数据初始化过程
         /// </summary>
         /// <param name="context"></param>
-        void Action(DbContext context);
+        void Action(YEFDbContext context);
     }
 }

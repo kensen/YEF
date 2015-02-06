@@ -18,6 +18,7 @@ namespace YEF.Models
     {
         public YEFUser()
         {
+            base.Id = Guid.NewGuid();
             this.IsSPAdmin = false;
             this.UserType = UserTypeEnum.User;
         }

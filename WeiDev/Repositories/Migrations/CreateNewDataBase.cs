@@ -17,8 +17,7 @@ namespace YEF.Repositories.Migrations
 
         static CreateNewDataBase()
         {
-            SeedActions=new List<ISeedAction>();
-          
+            SeedActions=new List<ISeedAction>();     
         }
 
         protected override void Seed(YEFDbContext context)
