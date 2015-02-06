@@ -7,9 +7,9 @@ using YEF.Infrastructure.Data;
 
 namespace YEF.Models.EntityConfigurations
 {                                                                      
-    public class SysOrganizationConfiguration : EntityConfigurationBase<SysOrganizations,int>
+    public class YEFOrganizationConfiguration : EntityConfigurationBase<YEFOrganization,int>
     {
-        public SysOrganizationConfiguration()
+        public YEFOrganizationConfiguration()
         {
            
         }

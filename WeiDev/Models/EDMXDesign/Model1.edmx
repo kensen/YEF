@@ -13,23 +13,23 @@
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
         <EntityContainer Name="Model1Container" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="SysUsersSet" EntityType="Model1.SysUsers" />
-          <EntitySet Name="SysOrganizationsSet" EntityType="Model1.SysOrganizations" />
+          <EntitySet Name="YEFUserSet" EntityType="Model1.YEFUser" />
+          <EntitySet Name="YEFOrganizationSet" EntityType="Model1.YEFOrganization" />
           <AssociationSet Name="SysOrganizationsSysUsers" Association="Model1.SysOrganizationsSysUsers">
-            <End Role="SysOrganizations" EntitySet="SysOrganizationsSet" />
-            <End Role="SysUsers" EntitySet="SysUsersSet" />
+            <End Role="SysOrganizations" EntitySet="YEFOrganizationSet" />
+            <End Role="SysUsers" EntitySet="YEFUserSet" />
           </AssociationSet>
-          <EntitySet Name="SysRolesSet" EntityType="Model1.SysRoles" />
+          <EntitySet Name="YEFRoleSet" EntityType="Model1.YEFRole" />
           <AssociationSet Name="SysOrganizationsSysRoles" Association="Model1.SysOrganizationsSysRoles">
-            <End Role="SysOrganizations" EntitySet="SysOrganizationsSet" />
-            <End Role="SysRoles" EntitySet="SysRolesSet" />
+            <End Role="SysOrganizations" EntitySet="YEFOrganizationSet" />
+            <End Role="SysRoles" EntitySet="YEFRoleSet" />
           </AssociationSet>
           <AssociationSet Name="SysUsersSysRoles" Association="Model1.SysUsersSysRoles">
-            <End Role="SysUsers" EntitySet="SysUsersSet" />
-            <End Role="SysRoles" EntitySet="SysRolesSet" />
+            <End Role="SysUsers" EntitySet="YEFUserSet" />
+            <End Role="SysRoles" EntitySet="YEFRoleSet" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="SysUsers">
+        <EntityType Name="YEFUser">
           <Documentation>
             <Summary>系统用户表</Summary>
             <LongDescription>系统用户实体
@@ -70,8 +70,8 @@
               <LongDescription>用户类型</LongDescription>
             </Documentation>
           </Property>
-          <NavigationProperty Name="SysOrganizations" Relationship="Model1.SysOrganizationsSysUsers" FromRole="SysUsers" ToRole="SysOrganizations" />
-          <NavigationProperty Name="SysRoles" Relationship="Model1.SysUsersSysRoles" FromRole="SysUsers" ToRole="SysRoles" />
+          <NavigationProperty Name="YEFOrganization" Relationship="Model1.SysOrganizationsSysUsers" FromRole="SysUsers" ToRole="SysOrganizations" />
+          <NavigationProperty Name="YEFRole" Relationship="Model1.SysUsersSysRoles" FromRole="SysUsers" ToRole="SysRoles" />
           <Property Name="IsSPAdmin" Type="Boolean" Nullable="false" DefaultValue="false" >
             <Documentation>
               <Summary>是否是超级管理员</Summary>
@@ -83,21 +83,21 @@
           <Member Name="Admin" />
           <Member Name="User" />
         </EnumType>
-        <EntityType Name="SysOrganizations">
+        <EntityType Name="YEFOrganization">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" />
           <Property Name="Describe" Type="String" Nullable="false" />
-          <NavigationProperty Name="SysUsers" Relationship="Model1.SysOrganizationsSysUsers" FromRole="SysOrganizations" ToRole="SysUsers" />
-          <NavigationProperty Name="SysRoles" Relationship="Model1.SysOrganizationsSysRoles" FromRole="SysOrganizations" ToRole="SysRoles" />
+          <NavigationProperty Name="YEFUsers" Relationship="Model1.SysOrganizationsSysUsers" FromRole="SysOrganizations" ToRole="SysUsers" />
+          <NavigationProperty Name="YEFRoles" Relationship="Model1.SysOrganizationsSysRoles" FromRole="SysOrganizations" ToRole="SysRoles" />
         </EntityType>
         <Association Name="SysOrganizationsSysUsers">
-          <End Type="Model1.SysOrganizations" Role="SysOrganizations" Multiplicity="0..1" />
-          <End Type="Model1.SysUsers" Role="SysUsers" Multiplicity="*" />
+          <End Type="Model1.YEFOrganization" Role="SysOrganizations" Multiplicity="0..1" />
+          <End Type="Model1.YEFUser" Role="SysUsers" Multiplicity="*" />
         </Association>
-        <EntityType Name="SysRoles">
+        <EntityType Name="YEFRole">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -105,16 +105,16 @@
           <Property Name="RoleName" Type="String" Nullable="false" />
           <Property Name="RoleDescribe" Type="String" Nullable="false" />
           <Property Name="RoleAuthority" Type="String" Nullable="false" />
-          <NavigationProperty Name="SysOrganizations" Relationship="Model1.SysOrganizationsSysRoles" FromRole="SysRoles" ToRole="SysOrganizations" />
-          <NavigationProperty Name="SysUsers" Relationship="Model1.SysUsersSysRoles" FromRole="SysRoles" ToRole="SysUsers" />
+          <NavigationProperty Name="YEFOrganization" Relationship="Model1.SysOrganizationsSysRoles" FromRole="SysRoles" ToRole="SysOrganizations" />
+          <NavigationProperty Name="YEFUsers" Relationship="Model1.SysUsersSysRoles" FromRole="SysRoles" ToRole="SysUsers" />
         </EntityType>
         <Association Name="SysOrganizationsSysRoles">
-          <End Type="Model1.SysOrganizations" Role="SysOrganizations" Multiplicity="1" />
-          <End Type="Model1.SysRoles" Role="SysRoles" Multiplicity="*" />
+          <End Type="Model1.YEFOrganization" Role="SysOrganizations" Multiplicity="1" />
+          <End Type="Model1.YEFRole" Role="SysRoles" Multiplicity="*" />
         </Association>
         <Association Name="SysUsersSysRoles">
-          <End Type="Model1.SysUsers" Role="SysUsers" Multiplicity="*" />
-          <End Type="Model1.SysRoles" Role="SysRoles" Multiplicity="0..1" />
+          <End Type="Model1.YEFUser" Role="SysUsers" Multiplicity="*" />
+          <End Type="Model1.YEFRole" Role="SysRoles" Multiplicity="0..1" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>

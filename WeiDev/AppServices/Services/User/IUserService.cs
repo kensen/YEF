@@ -16,7 +16,7 @@ namespace YEF.AppServices.Services.User
     {  /// <summary>
         /// 获取 用户信息查询数据集
         /// </summary>
-        IQueryable<SysUsers> Users { get; }
+        IQueryable<YEFUser> Users { get; }
 
         AccountDto LoginUser { get; set; }
 
@@ -26,7 +26,7 @@ namespace YEF.AppServices.Services.User
         /// <param name="predicate">检查谓语表达式</param>
         /// <param name="id">更新的用户信息编号</param>
         /// <returns>用户信息是否存在</returns>
-        bool CheckUserExists(Expression<Func<SysUsers, bool>> predicate, Guid? id = null );
+        bool CheckUserExists(Expression<Func<YEFUser, bool>> predicate, Guid? id = null );
 
         /// <summary>
         /// 添加用户信息信息

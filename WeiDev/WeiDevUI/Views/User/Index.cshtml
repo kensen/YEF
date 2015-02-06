@@ -1,5 +1,5 @@
 ﻿
-@model PagedList<YEF.Models.SysUser>
+@model PagedList<YEF.Models.YEFUser>
 
 @{
     ViewBag.Title = "用户管理";
@@ -52,7 +52,7 @@
                     <table id="editable-sample" class="table table-striped table-hover table-bordered dataTable" aria-describedby="editable-sample_info">
                         <thead>
                             <tr role="row">
-                                <th class="sorting" role="columnheader" rowspan="1" colspan="1"  aria-label="Username">@Html.DisplayNameFor(model => model.SysRole.RoleName)</th>
+                                <th class="sorting" role="columnheader" rowspan="1" colspan="1"  aria-label="Username">@Html.DisplayNameFor(model => model.YEFRole.RoleName)</th>
                                 <th class="sorting" role="columnheader" tabindex="0" aria-controls="editable-sample" rowspan="1" colspan="1" >@Html.DisplayNameFor(model => model.UserName)</th>
                                 <th class="sorting" role="columnheader" tabindex="0" aria-controls="editable-sample" rowspan="1" colspan="1" >@Html.DisplayNameFor(model => model.LoginID)</th>
                                 <th class="sorting" role="columnheader" tabindex="0" aria-controls="editable-sample" rowspan="1" colspan="1" >@Html.DisplayNameFor(model => model.UserType)</th>
@@ -73,7 +73,7 @@
                                 {
                                     <tr class="odd">
                                         <td class=" ">
-                                            @Html.DisplayFor(modelItem => item.SysRole.RoleName)
+                                            @Html.DisplayFor(modelItem => item.YEFRole.RoleName)
                                         </td>
                                         <td class=" ">
                                             @Html.DisplayFor(modelItem => item.UserName)
@@ -82,8 +82,8 @@
                                             @Html.DisplayFor(modelItem => item.LoginID)
                                         </td>
                                         <td class=" ">
-                                            @Html.FormatUserType( item.UserType)
-                                            @*@Html.DisplayFor(modelItem => item.UserType)*@
+                                            @*@Html.FormatUserType( item.UserType)*@
+                                            @Html.DisplayFor(modelItem => item.UserType)
                                         </td>
                                         <td class=" ">
                                             @Html.DisplayFor(modelItem => item.IsSPAdmin)
@@ -97,9 +97,9 @@
                                         </td>*@
 
                                         <td class=" " style="width:100px;">
-                                            <a href="@Url.Action("Details", new { id = item.SysUserID })" class="btn btn-success btn-xs"><i class="fa  fa-check"></i></a>
-                                            <a href="@Url.Action("Edit", new { id = item.SysUserID })" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
-                                            <a href="@Url.Action("Delete", new { id = item.SysUserID })" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
+                                            <a href="@Url.Action("Details", new { id = item.Id })" class="btn btn-success btn-xs"><i class="fa  fa-check"></i></a>
+                                            <a href="@Url.Action("Edit", new { id = item.Id })" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+                                            <a href="@Url.Action("Delete", new { id = item.Id })" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
 
 
                                         </td>
@@ -109,7 +109,7 @@
                                 {
                                     <tr class="even">
                                         <td class=" ">
-                                            @Html.DisplayFor(modelItem => item.SysRole.RoleName)
+                                            @Html.DisplayFor(modelItem => item.YEFRole.RoleName)
                                         </td>
                                         <td class=" ">
                                             @Html.DisplayFor(modelItem => item.UserName)
@@ -118,15 +118,16 @@
                                             @Html.DisplayFor(modelItem => item.LoginID)
                                         </td>
                                         <td class=" ">
-                                            @Html.FormatUserType(item.UserType)
+                                            @*@Html.FormatUserType(item.UserType)*@
+                                            @Html.DisplayFor(modelItem => item.UserType)
                                         </td>
                                         <td class=" ">
                                             @Html.DisplayFor(modelItem => item.IsSPAdmin)
                                         </td>
                                         <td class=" " style="width:100px;">
-                                            <a href="@Url.Action("Details", new { id = item.SysUserID })" class="btn btn-success btn-xs"><i class="fa  fa-check"></i></a>
-                                            <a href="@Url.Action("Edit", new { id = item.SysUserID })" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
-                                            <a href="@Url.Action("Delete", new { id = item.SysUserID })" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
+                                            <a href="@Url.Action("Details", new { id = item.Id })" class="btn btn-success btn-xs"><i class="fa  fa-check"></i></a>
+                                            <a href="@Url.Action("Edit", new { id = item.Id })" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+                                            <a href="@Url.Action("Delete", new { id = item.Id })" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
 
                                         </td>
                                         @*<td class=" ">

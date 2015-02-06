@@ -25,8 +25,8 @@ namespace YEF.Models.EDMXDesign
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<SysUsers> SysUsersSet { get; set; }
-        public virtual DbSet<SysOrganizations> SysOrganizationsSet { get; set; }
-        public virtual DbSet<SysRoles> SysRolesSet { get; set; }
+        public virtual DbSet<YEFUser> YEFUserSet { get; set; }
+        public virtual DbSet<YEFOrganization> YEFOrganizationSet { get; set; }
+        public virtual DbSet<YEFRole> YEFRoleSet { get; set; }
     }
 }

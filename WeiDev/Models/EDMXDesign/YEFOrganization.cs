@@ -12,19 +12,19 @@ namespace YEF.Models.EDMXDesign
     using System;
     using System.Collections.Generic;
     
-    public partial class SysOrganizations
+    public partial class YEFOrganization
     {
-        public SysOrganizations()
+        public YEFOrganization()
         {
-            this.SysUsers = new HashSet<SysUsers>();
-            this.SysRoles = new HashSet<SysRoles>();
+            this.YEFUsers = new HashSet<YEFUser>();
+            this.YEFRoles = new HashSet<YEFRole>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
         public string Describe { get; set; }
     
-        public virtual ICollection<SysUsers> SysUsers { get; set; }
-        public virtual ICollection<SysRoles> SysRoles { get; set; }
+        public virtual ICollection<YEFUser> YEFUsers { get; set; }
+        public virtual ICollection<YEFRole> YEFRoles { get; set; }
     }
 }

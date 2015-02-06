@@ -5,10 +5,10 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="1a44a07d574d44169bf4906e1a3abfb5" Name="Diagram1" >
-        <EntityTypeShape EntityType="Model1.SysUsers" Width="1.5" PointX="0.625" PointY="0.875" />
-        <EntityTypeShape EntityType="Model1.SysOrganizations" Width="1.5" PointX="3" PointY="0.5" />
+        <EntityTypeShape EntityType="Model1.YEFUser" Width="1.5" PointX="0.625" PointY="0.875" />
+        <EntityTypeShape EntityType="Model1.YEFOrganization" Width="1.5" PointX="3" PointY="0.5" />
         <AssociationConnector Association="Model1.SysOrganizationsSysUsers" />
-        <EntityTypeShape EntityType="Model1.SysRoles" Width="1.5" PointX="0.625" PointY="4.125" />
+        <EntityTypeShape EntityType="Model1.YEFRole" Width="1.5" PointX="0.625" PointY="4.125" />
         <AssociationConnector Association="Model1.SysOrganizationsSysRoles" />
         <AssociationConnector Association="Model1.SysUsersSysRoles" />
       </Diagram>

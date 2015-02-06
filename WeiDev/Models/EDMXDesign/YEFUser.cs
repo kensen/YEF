@@ -12,19 +12,22 @@ namespace YEF.Models.EDMXDesign
     using System;
     using System.Collections.Generic;
     
-    public partial class SysRoles
+    public partial class YEFUser
     {
-        public SysRoles()
+        public YEFUser()
         {
-            this.SysUsers = new HashSet<SysUsers>();
+            this.IsSPAdmin = false;
         }
     
         public int Id { get; set; }
-        public string RoleName { get; set; }
-        public string RoleDescribe { get; set; }
-        public string RoleAuthority { get; set; }
+        public string UserName { get; set; }
+        public string LoginID { get; set; }
+        public string Password { get; set; }
+        public string ADPassword { get; set; }
+        public UserTypeEnum UserType { get; set; }
+        public bool IsSPAdmin { get; set; }
     
-        public virtual SysOrganizations SysOrganizations { get; set; }
-        public virtual ICollection<SysUsers> SysUsers { get; set; }
+        public virtual YEFOrganization YEFOrganization { get; set; }
+        public virtual YEFRole YEFRole { get; set; }
     }
 }

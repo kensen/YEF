@@ -19,14 +19,14 @@ namespace YEF.AppServices.Services.User
    public class UsersService:IUserService
     {
 
-       private readonly IRepository<SysUsers,Guid> _userRepository;
+       private readonly IRepository<YEFUser,Guid> _userRepository;
 
-       public UsersService(IRepository<SysUsers,Guid> userRepository)
+       public UsersService(IRepository<YEFUser,Guid> userRepository)
        {
            this._userRepository=userRepository;
        }
 
-        public IQueryable<SysUsers> Users
+        public IQueryable<YEFUser> Users
         {
             get { return _userRepository.Entities; }
         }
@@ -43,7 +43,7 @@ namespace YEF.AppServices.Services.User
 	        }
         }
 
-        public bool CheckUserExists(Expression<Func<SysUsers,bool>> predicate, Guid? id =null)
+        public bool CheckUserExists(Expression<Func<YEFUser,bool>> predicate, Guid? id =null)
         {
  	       return  _userRepository.ExistsCheck(predicate,id.Value);
         }
@@ -51,7 +51,7 @@ namespace YEF.AppServices.Services.User
         public OperationResult AddUsers(params UserDto[] dtos)
         {
  	        dtos.CheckNotNullOrEmpty("dtos");
-            List<SysUsers> users=new List<SysUsers>();
+            List<YEFUser> users=new List<YEFUser>();
 
              OperationResult result=_userRepository.Insert(dtos,
                 dto=>

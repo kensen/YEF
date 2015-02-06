@@ -26,7 +26,7 @@ namespace WeiDevUI.Controllers
         // GET: /User/
         public ActionResult Index(int page=1)
         {
-           // var sysusers = db.SysUsers.Include(s => s.SysRole);
+            var sysusers = _userService.Users.Include(s => s.YEFRole);
 
            // int pageIndex = 0;
             int pageSize = 1;
@@ -36,7 +36,7 @@ namespace WeiDevUI.Controllers
            //// sysusers.Count();
            // return View(sysusers.OrderBy(o => o.SysUserID).ToPagedList(page, pageSize));
 
-            return View(_userService.Users.ToPagedList(page,pageSize));
+            return View(sysusers.OrderBy(o => o.AddTime).ToPagedList(page, pageSize));
         }
 
         // GET: /User/Details/5
@@ -76,7 +76,7 @@ namespace WeiDevUI.Controllers
         // 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="SysUserID,UserName,LoginID,Password,ADPasswor,UserType,IsSPAdmin,SysRoleID")] SysUsers sysuser)
+        public ActionResult Create([Bind(Include="SysUserID,UserName,LoginID,Password,ADPasswor,UserType,IsSPAdmin,SysRoleID")] YEFUser sysuser)
         {
             //if (ModelState.IsValid)
             //{
@@ -121,7 +121,7 @@ namespace WeiDevUI.Controllers
         // 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="SysUserID,UserName,LoginID,Password,ADPasswor,UserType,IsSPAdmin,SysRoleID")] SysUsers sysuser)
+        public ActionResult Edit([Bind(Include="SysUserID,UserName,LoginID,Password,ADPasswor,UserType,IsSPAdmin,SysRoleID")] YEFUser sysuser)
         {
             //if (ModelState.IsValid)
             //{

@@ -15,9 +15,9 @@ namespace YEF.AppServices.Services.User
 {
     public interface IOrganizationService : IDependency
     {
-        IQueryable<SysOrganizations> Organizations { get; }
+        IQueryable<YEFOrganization> Organizations { get; }
 
-        bool CheckOrganizationExists(Expression<Func<SysOrganizations, bool>> predicate, int id = 0);
+        bool CheckOrganizationExists(Expression<Func<YEFOrganization, bool>> predicate, int id = 0);
 
         /// <summary>
         /// 添加组织机构信息信息

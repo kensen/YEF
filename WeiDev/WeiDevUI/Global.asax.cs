@@ -55,7 +55,9 @@ namespace WeiDevUI
 
         private static void DatabaseInitialize()
         {
-            Assembly assembly = Assembly.GetExecutingAssembly();
+            //Assembly assembly = Assembly.GetExecutingAssembly();
+            Assembly assembly = Assembly.GetExecutingAssembly().GetReferencedAssemblies()
+                .Select(Assembly.Load).Where(a => a.ManifestModule.Name == "YEFModels.dll").First();
             DatabaseInitializer.AddMapperAssembly(assembly);
 
             DatabaseInitializer.Initialize();

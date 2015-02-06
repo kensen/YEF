@@ -17,14 +17,14 @@ namespace YEF.AppServices.Services.User
 {
     public class RolesService:ServiceBase, IRoleService
     {
-         private readonly IRepository<SysRoles, int> _rolesRepository;
+         private readonly IRepository<YEFRole, int> _rolesRepository;
 
-        public RolesService(IRepository<SysRoles,int> rolesRepository)
+        public RolesService(IRepository<YEFRole,int> rolesRepository)
             :base(rolesRepository.UnitOfWork)
         {
             this._rolesRepository=rolesRepository;
         }
-        public IQueryable<SysRoles> Role
+        public IQueryable<YEFRole> Role
         {
 	        get{return _rolesRepository.Entities;}
         }

@@ -13,10 +13,10 @@ namespace YEF.AppServices.ViewModels
         public static void MapperRegister()
         {
             //Identity
-            Mapper.CreateMap<OrganizationDto, SysOrganizations>();
-            Mapper.CreateMap<UserDto, SysUsers>();
-            Mapper.CreateMap<AccountDto, SysUsers>();
-            Mapper.CreateMap<RoleDto, SysRoles>();
+            Mapper.CreateMap<OrganizationDto, YEFOrganization>();
+            Mapper.CreateMap<UserDto, YEFUser>();
+            Mapper.CreateMap<AccountDto, YEFUser>();
+            Mapper.CreateMap<RoleDto, YEFRole>();
         }
     }
 }

@@ -39,7 +39,7 @@ namespace WeiDevUI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SysRoles sysrole =_roleService.Role.Where(m => m.Id == id.Value).First();
+            YEFRole sysrole =_roleService.Role.Where(m => m.Id == id.Value).First();
             if (sysrole == null)
             {
                 return HttpNotFound();
@@ -61,7 +61,7 @@ namespace WeiDevUI.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Create([Bind(Include="SysRoleID,RoleName,RoleDescribe,RoleAuthority")] SysRoles sysrole)
+        public ActionResult Create([Bind(Include="SysRoleID,RoleName,RoleDescribe,RoleAuthority")] YEFRole sysrole)
         {
             //if (ModelState.IsValid)
             //{
@@ -102,7 +102,7 @@ namespace WeiDevUI.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Edit([Bind(Include="SysRoleID,RoleName,RoleDescribe,RoleAuthority")] SysRoles sysrole)
+        public ActionResult Edit([Bind(Include="SysRoleID,RoleName,RoleDescribe,RoleAuthority")] YEFRole sysrole)
         {
             //if (ModelState.IsValid)
             //{

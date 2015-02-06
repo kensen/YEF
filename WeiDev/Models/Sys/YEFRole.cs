@@ -8,20 +8,20 @@ using YEF.Infrastructure.Data;
 
 namespace YEF.Models
 {
-   public class SysRoles:EntityBase<int>
+    public class YEFRole : EntityBase<int>
     {
-        public SysRoles()
+        public YEFRole()
         {
-            this.SysUsers = new HashSet<SysUsers>();
+            this.YEFUsers = new HashSet<YEFUser>();
         }
 
-       [Display(Name = "角色名称")]
-       [Required ,StringLength(200)]
+        [Display(Name = "角色名称")]
+        [Required, StringLength(200)]
         public string RoleName { get; set; }
         public string RoleDescribe { get; set; }
         public string RoleAuthority { get; set; }
 
-        public virtual SysOrganizations SysOrganizations { get; set; }
-        public virtual ICollection<SysUsers> SysUsers { get; set; }
+        public virtual YEFOrganization YEFOrganization { get; set; }
+        public virtual ICollection<YEFUser> YEFUsers { get; set; }
     }
 }

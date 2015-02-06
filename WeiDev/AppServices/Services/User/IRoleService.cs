@@ -14,7 +14,7 @@ namespace YEF.AppServices.Services.User
 {
    public interface IRoleService:IDependency
     {
-       IQueryable<SysRoles> Role { get; }
+       IQueryable<YEFRole> Role { get; }
 
       // bool CheckRoleEx(Expression<Func<SysRoles, bool>> predicate, int id = 0);
 

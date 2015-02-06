@@ -14,16 +14,16 @@ namespace YEF.Repositories
         {
             protected override void Seed(WeiDevContext context)
             {
-                var sysRoles = new List<SysRoles>
+                var sysRoles = new List<YEFRole>
                 {
-                new SysRoles{ RoleName="系统管理员", RoleDescribe="系统管理员",RoleAuthority=""}
+                new YEFRole{ RoleName="系统管理员", RoleDescribe="系统管理员",RoleAuthority=""}
           
                 };
                 sysRoles.ForEach(s => context.SysRoles.Add(s));
                 context.SaveChanges();
-                var sysUsers = new List<SysUsers>
+                var sysUsers = new List<YEFUser>
                 {
-                new SysUsers{ UserName="Admin",LoginID="Admin",Password=MD5Class.GetMd5("123456"), ADPassword=MD5Class.GetMd5("123456"),  IsSPAdmin=true, Id=Guid.NewGuid()}
+                new YEFUser{ UserName="Admin",LoginID="Admin",Password=MD5Class.GetMd5("123456"), ADPassword=MD5Class.GetMd5("123456"),  IsSPAdmin=true, Id=Guid.NewGuid()}
           
                 };
 

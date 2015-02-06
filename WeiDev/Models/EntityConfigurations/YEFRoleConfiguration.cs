@@ -7,11 +7,11 @@ using YEF.Infrastructure.Data;
 
 namespace YEF.Models.EntityConfigurations
 {
-   public  class SysRolesConfiguration:EntityConfigurationBase<SysRoles,int>
+   public  class YEFRoleConfiguration:EntityConfigurationBase<YEFRole,int>
     {
-       public SysRolesConfiguration()
+       public YEFRoleConfiguration()
        {
-           HasOptional(m=>m.SysOrganizations).WithMany(n=>n.SysRoles);
+           HasOptional(m=>m.YEFOrganization).WithMany(n=>n.YEFRoles);
        }
     }
 }

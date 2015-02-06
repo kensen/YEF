@@ -17,20 +17,20 @@ namespace YEF.AppServices.Services.User
 {
     public class OrganizationService:ServiceBase, IOrganizationService
     {
-        private readonly IRepository<SysOrganizations, int> _organizationRepository;
+        private readonly IRepository<YEFOrganization, int> _organizationRepository;
 
-        public OrganizationService(IRepository<SysOrganizations, int> organizationRepository )
+        public OrganizationService(IRepository<YEFOrganization, int> organizationRepository )
             : base(organizationRepository.UnitOfWork)
         {
             this._organizationRepository = organizationRepository;
         }
 
-        public IQueryable<SysOrganizations> Organizations
+        public IQueryable<YEFOrganization> Organizations
         {
            get {return _organizationRepository.Entities;}
         }
 
-        public bool CheckOrganizationExists(Expression<Func<SysOrganizations, bool>> predicate, int id = 0)
+        public bool CheckOrganizationExists(Expression<Func<YEFOrganization, bool>> predicate, int id = 0)
         {
            return  _organizationRepository.ExistsCheck(predicate,id);
         }
@@ -38,7 +38,7 @@ namespace YEF.AppServices.Services.User
         public OperationResult AddOrganizations(params OrganizationDto[] dtos)
         {
             dtos.CheckNotNull("dtos");
-            List<SysOrganizations>orglist=new List<SysOrganizations>();
+            List<YEFOrganization>orglist=new List<YEFOrganization>();
 
             OperationResult result=_organizationRepository.Insert(dtos,
                 dto=>
@@ -63,7 +63,7 @@ namespace YEF.AppServices.Services.User
         public OperationResult EditOrganizations(params OrganizationDto[] dtos)
         {
              dtos.CheckNotNull("dtos");
-            List<SysOrganizations>orglist=new List<SysOrganizations>();
+            List<YEFOrganization>orglist=new List<YEFOrganization>();
 
             OperationResult result=_organizationRepository.Update(dtos,
                 dto=>
