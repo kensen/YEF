@@ -38,6 +38,11 @@ namespace YEF.Models
         [Required, StringLength(50)]
         public string ADPassword { get; set; }
 
+        [EmailAddress]
+        [StringLength(100)]
+        [Display(Name="Email")]
+        public string Email { get; set; }
+
         [Required]
         public UserTypeEnum UserType { get; set; }
 
