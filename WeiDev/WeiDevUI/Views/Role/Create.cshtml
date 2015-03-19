@@ -1,4 +1,4 @@
-﻿@model YEF.Models.SysRole
+﻿@model YEF.Models.YEFRole
 
 
 @{
@@ -72,7 +72,7 @@
 
                                                 @{int num = 0;}
 
-                                                @foreach (var a in (List<WeiDevUI.Models.MenuModel>)ViewBag.AuthorityList)
+                                                @foreach (var a in (List<YEF.AppServices.ViewModels.MenuModel>)ViewBag.AuthorityList)
                                                 {
 
                                                         if (a.Item.Count > 0)

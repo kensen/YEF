@@ -1,4 +1,4 @@
-﻿@model IEnumerable<YEF.Models.SysRole>
+﻿@model IEnumerable<YEF.Models.YEFRole>
 
 @{
     ViewBag.Title = "角色管理";
@@ -85,9 +85,9 @@
                                             </td>*@
 
                                         <td class=" " style="width:100px;">
-                                            <a href="@Url.Action("Details", new { id = item.SysRoleID })" class="btn btn-success btn-xs"><i class="fa  fa-check"></i></a>
-                                            <a href="@Url.Action("Edit", new { id = item.SysRoleID })" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
-                                            <a href="@Url.Action("Delete", new { id = item.SysRoleID })" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
+                                            <a href="@Url.Action("Details", new { id = item.Id })" class="btn btn-success btn-xs"><i class="fa  fa-check"></i></a>
+                                            <a href="@Url.Action("Edit", new { id = item.Id })" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+                                            <a href="@Url.Action("Delete", new { id = item.Id })" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
 
 
                                         </td>
@@ -103,9 +103,9 @@
                                             @Html.DisplayFor(modelItem => item.RoleDescribe)
                                         </td>
                                         <td class=" ">
-                                            <a href="@Url.Action("Details", new { id = item.SysRoleID })" class="btn btn-success btn-xs"><i class="fa  fa-check"></i></a>
-                                            <a href="@Url.Action("Edit", new { id = item.SysRoleID })" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
-                                            <a href="@Url.Action("Delete", new { id = item.SysRoleID })" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
+                                            <a href="@Url.Action("Details", new { id = item.Id })" class="btn btn-success btn-xs"><i class="fa  fa-check"></i></a>
+                                            <a href="@Url.Action("Edit", new { id = item.Id })" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+                                            <a href="@Url.Action("Delete", new { id = item.Id })" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
 
                                         </td>
                                         @*<td class=" ">
